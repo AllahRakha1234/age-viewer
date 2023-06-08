@@ -18,14 +18,17 @@
  */
 
 .Content {
-  width: 100%;
+  width: 90%;
   height: 100%;
   min-height: 100%;
   transition: all 0.3s;
+  margin-top: 2px;
   top: 0;
   right: 0;
-  background-color: var(--bg-color);
+  background-color: orchid;
   color: var(--text-color);
+  border: 1px solid black;
+  font-size: 1rem;
 }
 
 .Content.Expanded {
