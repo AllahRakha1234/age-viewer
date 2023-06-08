@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
+/* eslint-disable */
 import React, { useRef, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import 'codemirror/keymap/sublime';
@@ -32,93 +32,95 @@ const CodeMirrorWrapper = ({
   const codeMirrorRef = useRef();
 
   return (
-    <CodeMirror
-      id="editor"
-      ref={codeMirrorRef}
-      value={value}
-      options={{
-        keyMap: 'sublime',
-        mode: 'cypher',
-        placeholder: 'Create a query...',
-        tabSize: 4,
-        lineNumbers: true,
-        spellcheck: false,
-        autocorrect: false,
-        autocapitalize: false,
-        lineNumberFormatter: () => '$',
-        extraKeys: {
-          'Shift-Enter': (editor) => {
-            onClick();
-            editor.setValue('');
-            setCommandHistoryIndex(-1);
-          },
-          'Ctrl-Enter': (editor) => {
-            onClick();
-            editor.setValue('');
-            setCommandHistoryIndex(-1);
-          },
-          'Ctrl-Up': (editor) => {
-            if (commandHistory.length === 0) {
-              return;
-            }
-            if (commandHistoryIndex === -1) {
-              const currentIdx = commandHistory.length - 1;
-              editor.setValue(commandHistory[currentIdx]);
-              setCommandHistoryIndex(currentIdx);
-              return;
-            }
-            if (commandHistoryIndex === 0) {
-              editor.setValue(commandHistory[0]);
-              setCommandHistoryIndex(0);
-              return;
-            }
-
-            editor.setValue(commandHistory[commandHistoryIndex - 1]);
-            setCommandHistoryIndex(commandHistoryIndex - 1);
-          },
-          'Ctrl-Down': (editor) => {
-            if (commandHistory.length === 0) {
-              return;
-            }
-            if (commandHistoryIndex === -1) {
-              editor.setValue('');
-              return;
-            }
-
-            if (commandHistoryIndex === (commandHistory.length - 1)) {
+    <div style={{ border: '3px solid red', width: '100vw' }} >
+      <CodeMirror
+        id="editor"
+        ref={codeMirrorRef}
+        value={value}
+        options={{
+          keyMap: 'sublime',
+          mode: 'cypher',
+          placeholder: 'Create a Query',
+          tabSize: 4,
+          lineNumbers: true,
+          spellcheck: false,
+          autocorrect: false,
+          autocapitalize: false,
+          lineNumberFormatter: () => '$',
+          extraKeys: {
+            'Shift-Enter': (editor) => {
+              onClick();
               editor.setValue('');
               setCommandHistoryIndex(-1);
-              return;
-            }
+            },
+            'Ctrl-Enter': (editor) => {
+              onClick();
+              editor.setValue('');
+              setCommandHistoryIndex(-1);
+            },
+            'Ctrl-Up': (editor) => {
+              if (commandHistory.length === 0) {
+                return;
+              }
+              if (commandHistoryIndex === -1) {
+                const currentIdx = commandHistory.length - 1;
+                editor.setValue(commandHistory[currentIdx]);
+                setCommandHistoryIndex(currentIdx);
+                return;
+              }
+              if (commandHistoryIndex === 0) {
+                editor.setValue(commandHistory[0]);
+                setCommandHistoryIndex(0);
+                return;
+              }
 
-            editor.setValue(commandHistory[commandHistoryIndex + 1]);
-            setCommandHistoryIndex(commandHistoryIndex + 1);
+              editor.setValue(commandHistory[commandHistoryIndex - 1]);
+              setCommandHistoryIndex(commandHistoryIndex - 1);
+            },
+            'Ctrl-Down': (editor) => {
+              if (commandHistory.length === 0) {
+                return;
+              }
+              if (commandHistoryIndex === -1) {
+                editor.setValue('');
+                return;
+              }
+
+              if (commandHistoryIndex === (commandHistory.length - 1)) {
+                editor.setValue('');
+                setCommandHistoryIndex(-1);
+                return;
+              }
+
+              editor.setValue(commandHistory[commandHistoryIndex + 1]);
+              setCommandHistoryIndex(commandHistoryIndex + 1);
+            },
+            Enter: (editor) => {
+              editor.replaceSelection('\n', 'end');
+            },
           },
-          Enter: (editor) => {
-            editor.replaceSelection('\n', 'end');
-          },
-        },
-      }}
-      onChange={(editor) => {
-        onChange(editor.getValue());
-        const lineCount = editor.lineCount();
-        let draggedHeight;
-        let height;
-        if (lineCount <= 1) {
-          editor.setOption('lineNumberFormatter', () => '$');
-        } else {
-          editor.setOption('lineNumberFormatter', (number) => number);
-          draggedHeight = document.getElementById('codeMirrorEditor').style.height;
-          if (draggedHeight) {
-            [height] = draggedHeight.split('px');
-            if (height < (58 + 21 * lineCount)) {
-              document.getElementById('codeMirrorEditor').style.height = null;
+        }}
+        onChange={(editor) => {
+          onChange(editor.getValue());
+          const lineCount = editor.lineCount();
+          let draggedHeight;
+          let height;
+          if (lineCount <= 1) {
+            editor.setOption('lineNumberFormatter', () => '$');
+          } else {
+            editor.setOption('lineNumberFormatter', (number) => number);
+            draggedHeight = document.getElementById('codeMirrorEditor').style.height;
+            if (draggedHeight) {
+              [height] = draggedHeight.split('px');
+              if (height < (58 + 21 * lineCount)) {
+                document.getElementById('codeMirrorEditor').style.height = null;
+              }
             }
           }
-        }
-        return true;
-      }}
-    />
+          return true;
+        }}
+      />
+    </div >
   );
 };
 
