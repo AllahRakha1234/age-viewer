@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
+/* eslint-disable */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -383,33 +383,33 @@ const SidebarHome = ({
   };
 
   return (
-    <div className="sidebar-home">
+    <div className="sidebar-home" style={{ border: "1px solid black", backgroundColor: "Bisque" }}>
       <div className="sidebar sidebar-body">
         <div className="form-group sidebar-item">
-          <b>Node Label</b>
+          <h4><b>Node Label</b></h4>
           <br />
           <NodeList nodes={nodes} setCommand={setCommand} />
         </div>
         <VerticalLine />
         <div className="form-group sidebar-item">
-          <b>Edge Label</b>
+          <h4><b>Edge Label</b></h4>
           <br />
           <EdgeList edges={edges} setCommand={setCommand} />
         </div>
         <VerticalLine />
         <div className="form-group sidebar-item">
-          <b>Properties</b>
+          <h4><b>Properties</b></h4>
           <br />
           <PropertyList propertyKeys={propertyKeys} setCommand={setCommand} />
         </div>
         <div id="lastHorizontalLine">
           <VerticalLine />
         </div>
-        { isLabel && (
+        {isLabel && (
           <>
             <div className="form-group sidebar-item">
-              <b>Graphs</b>
-              <br />
+              <h4><b>Graphs</b>
+                <br /></h4>
               <GraphList
                 graphs={graphs}
                 currentGraph={currentGraph}
@@ -421,9 +421,9 @@ const SidebarHome = ({
               <VerticalLine />
             </div>
           </>
-        ) }
+        )}
       </div>
-      <div className="sidebar-item-disconnect-outer">
+      <div className="sidebar-item-disconnect-outer" style={{ backgroundColor: "PaleGreen" }}>
         <div className="form-group sidebar-item-disconnect">
           <div className="sidebar-item-disconnect-buttons">
             <button
@@ -466,10 +466,10 @@ const SidebarHome = ({
             <br />
             <b>Close Session</b>
           </div>
-          { !isLabel && (
+          {!isLabel && (
             <>
               <HorizontalLine />
-              <div className="sidebar-item-disconnect-buttons">
+              <div className="sidebar-item-disconnect-buttons" style={{ border: '1px solid black' }} >
                 <GraphSelectDropdown
                   currentGraph={currentGraph}
                   graphs={graphs}
@@ -478,7 +478,7 @@ const SidebarHome = ({
                 />
               </div>
             </>
-          ) }
+          )}
         </div>
       </div>
     </div>
