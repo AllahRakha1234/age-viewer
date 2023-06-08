@@ -1,4 +1,10 @@
-pre.CodeMirror-placeholder.CodeMirror-line-like{
-    color:grey;
+pre.CodeMirror-placeholder.CodeMirror-line-like {
+    color: rgb(0, 0, 0);
     opacity: 90%;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+pre.CodeMirror-lineNumberFormatter {
+    font-size: 1rem;
 }
