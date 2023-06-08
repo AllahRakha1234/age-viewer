@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   Button, Drawer, Select, Space,
 } from 'antd';
@@ -50,6 +51,7 @@ const BuilderContainer = ({ open, setOpen, finder }) => {
       open={open}
       onClose={() => setOpen(!open)}
       placement="left"
+      id="query-gen"
     >
       <Select
         id="graph-selection"
@@ -63,7 +65,7 @@ const BuilderContainer = ({ open, setOpen, finder }) => {
               value={s}
             />
           ))
-          }
+        }
       </Select>
 
       <Space />
@@ -80,7 +82,7 @@ const BuilderContainer = ({ open, setOpen, finder }) => {
         />
       </div>
       <div id="submit-builder">
-        <Button size="sm" onClick={handleSubmit}>Submit</Button>
+        <Button id="submitBtn" size="sm" onClick={handleSubmit}>Submit</Button>
       </div>
 
     </Drawer>
